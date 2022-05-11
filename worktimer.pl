@@ -3,7 +3,7 @@
 # worktimer.pl       : Консольный тайм-менеджер
 # Автор              : Виталий Клименков
 # Домашняя страничка : https://vklimenkov.ru
-# Гитхаб             : 
+# Гитхаб             : https://github.com/vklimenkov/perl-worktimer
 
 
 use strict;
@@ -407,7 +407,7 @@ sub _get_task_id {
 		# получили id таска, нужно только его проверить
 		my $t = $db->selectrow_hashref(qq~
 			select * from task where id = ?
-		~, undef, $ARGV[1]);
+		~, undef, $arg);
 		if($t && $t->{id}){
 			return $t->{id};
 		} else {
@@ -421,7 +421,7 @@ sub _get_task_id {
 
 		# поэтому, нам нужно аккуратно пройтись по цепочке
 		# и создать недостающие узлы
-		my @nodes = split(/\//, $ARGV[1]);
+		my @nodes = split(/\//, $arg);
 		my $id = 0;
 		foreach my $n (@nodes){
 			# сначала ищем таск с таким именем в базе
